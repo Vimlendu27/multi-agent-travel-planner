@@ -35,21 +35,12 @@ This project is the third part of a Multi-Agent AI development series.
 
 ## Part 1 – Multi-Agent Travel Planning System
 
-**GitHub Repository:**
 
-[AI Travel Planning System using LangGraph](https://github.com/codewithaarohi/AI-Travel-Planning-System-using-LangGraph)
 
 
 
 ## Part 2 – Multi-Agent Travel Planning System with MCP
 
-**GitHub Repository:**
-
-[AI Travel Planning App using LangGraph and MCP](https://github.com/codewithaarohi/AI-Travel-Planning-App-using-LangGraph-and-MCP)
-
-**Video Tutorial:**
-
-[Build a Real-World Multi-Agent AI System using LangGraph | Multi-Agent AI + Memory + MCP](https://youtu.be/DjMX7o2EeV0)
 
 ## Part 3 – Advanced Multi-Agent Architecture
 
