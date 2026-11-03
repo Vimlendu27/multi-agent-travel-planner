@@ -1,46 +1,59 @@
 # ✈️ Multi-Agent AI Travel Planning System
-### Built with LangGraph, MCP, Supervisor Agent, Guardrails & Human-in-the-Loop
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
-[![LangGraph](https://img.shields.io/badge/Framework-LangGraph-green)](https://www.langchain.com/langgraph)
-[![MCP](https://img.shields.io/badge/Integration-MCP-purple)](https://modelcontextprotocol.io/)
-[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue)](https://www.postgresql.org/)
+### Intelligent Travel Planning using LangGraph, MCP, Supervisor Agent, Guardrails & Human-in-the-Loop
 
-## 📌 Project Overview
-
-This project extends the Multi-Agent AI Travel Planning System developed in Part 1 and Part 2 by introducing advanced agent orchestration and workflow management capabilities.
-
-The system leverages **LangGraph, Model Context Protocol (MCP), and Large Language Models (LLMs)** to build an intelligent travel planning application powered by multiple specialized AI agents.
-
-A centralized **Supervisor Agent** dynamically understands user requests, selects the appropriate agents, and coordinates their execution.
-
-The application also implements **Input Guardrails** for request validation and **Human-in-the-Loop (HITL)** for user approval and itinerary modifications.
-
-The complete solution integrates external APIs, MCP servers, PostgreSQL-based persistent memory, and a Streamlit web interface to deliver an intelligent and interactive travel planning experience.
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python" />
+  <img src="https://img.shields.io/badge/LangGraph-Agent%20Orchestration-green" />
+  <img src="https://img.shields.io/badge/MCP-Model%20Context%20Protocol-purple" />
+  <img src="https://img.shields.io/badge/Database-PostgreSQL-blue?logo=postgresql" />
+  <img src="https://img.shields.io/badge/Frontend-Streamlit-red?logo=streamlit" />
+  <img src="https://img.shields.io/badge/LLM-Groq-orange" />
+</p>
 
 ---
 
-## 📚 Project Series & Previous Implementations
+# 📌 1. Project Overview
 
-This project is part of a three-part Multi-Agent AI development series.
+The **Multi-Agent AI Travel Planning System** is an intelligent application designed to automate travel planning through collaborative AI agents.
 
-### Part 1: Multi-Agent Travel Planning System
+This project extends the Multi-Agent Travel Planning System developed in Part 1 and Part 2 by introducing advanced agent orchestration, request validation, and human approval mechanisms.
 
-**GitHub Repository:**  
+The application uses **LangGraph, Large Language Models (LLMs), and Model Context Protocol (MCP)** to coordinate multiple specialized AI agents.
+
+A centralized **Supervisor Agent** understands user requirements, dynamically selects the required agents, and manages the overall execution workflow.
+
+The system also implements Input Guardrails, Shared State Management, Human-in-the-Loop (HITL), and PostgreSQL-based Persistent Memory.
+
+The goal is to build an intelligent, interactive, and extensible AI-powered travel planning application.
+
+---
+
+# 📚 2. Project Series & Previous Implementations
+
+This project is the third part of a Multi-Agent AI development series.
+
+## Part 1 – Multi-Agent Travel Planning System
+
+**GitHub Repository:**
+
 [AI Travel Planning System using LangGraph](https://github.com/codewithaarohi/AI-Travel-Planning-System-using-LangGraph)
 
-**Video Tutorial:**  
+**Video Tutorial:**
+
 [Build a Real-World Multi-Agent AI System using LangGraph | Multi-Agent AI + Memory + APIs](https://youtu.be/ctHby5vhDqg)
 
-### Part 2: Multi-Agent Travel Planning System with MCP
+## Part 2 – Multi-Agent Travel Planning System with MCP
 
-**GitHub Repository:**  
+**GitHub Repository:**
+
 [AI Travel Planning App using LangGraph and MCP](https://github.com/codewithaarohi/AI-Travel-Planning-App-using-LangGraph-and-MCP)
 
-**Video Tutorial:**  
+**Video Tutorial:**
+
 [Build a Real-World Multi-Agent AI System using LangGraph | Multi-Agent AI + Memory + MCP](https://youtu.be/DjMX7o2EeV0)
 
-### Part 3: Advanced Multi-Agent Architecture
+## Part 3 – Advanced Multi-Agent Architecture
 
 This implementation introduces:
 
@@ -48,80 +61,212 @@ This implementation introduces:
 - Input Guardrails for request validation and safety checks.
 - Human-in-the-Loop for itinerary approval and modifications.
 - Shared State Management for agent communication.
-- Persistent Memory using PostgreSQL.
+- PostgreSQL-based Persistent Memory.
+- Advanced workflow management using LangGraph.
 
 ---
 
-## ✨ Key Features
+# 🏗️ 3. System Architecture
+
+The application follows a Supervisor-based Multi-Agent Architecture.
+
+The Supervisor Agent acts as the central coordinator and dynamically manages specialized agents according to user requirements.
+
+## High-Level Architecture Diagram
+
+```mermaid
+flowchart TD
+    A["User Request"] --> B["Input Guardrails"]
+
+    B -->|Valid Request| C["Supervisor Agent"]
+    B -->|Invalid Request| X["Blocked Request"]
+
+    C --> D["LangGraph Orchestrator"]
+
+    D --> E["Flight Agent"]
+    D --> F["Hotel Agent"]
+    D --> G["Weather Agent"]
+    D --> H["Budget Agent"]
+    D --> I["Itinerary Agent"]
+
+    E --> J["MCP Integration"]
+    F --> J
+    G --> J
+
+    J --> K["External APIs"]
+
+    E --> L["Shared State"]
+    F --> L
+    G --> L
+    H --> L
+    I --> L
+
+    L --> M["Human-in-the-Loop"]
+
+    M -->|Approve| N["Final Response Agent"]
+    M -->|Request Changes| C
+
+    N --> O["Final Travel Plan"]
+
+    L <--> P[("PostgreSQL Persistent Memory")]
+```
+
+## Architecture Components
+
+| Component | Responsibility |
+|---|---|
+| User Interface | Collects travel requirements |
+| Input Guardrails | Validates incoming requests |
+| Supervisor Agent | Coordinates specialized AI agents |
+| LangGraph | Manages workflow and agent execution |
+| Flight Agent | Searches flight information |
+| Hotel Agent | Finds hotel options |
+| Weather Agent | Retrieves weather forecasts |
+| Budget Agent | Analyzes estimated expenses |
+| Itinerary Agent | Creates day-wise travel plans |
+| MCP | Connects agents with external tools |
+| Shared State | Shares information between agents |
+| Human-in-the-Loop | Provides user approval and modification |
+| Final Response Agent | Generates the final travel plan |
+| PostgreSQL | Stores conversations and persistent checkpoints |
+
+---
+
+# ✨ 4. Key Features
 
 | Feature | Description |
 |---|---|
-| Multi-Agent Architecture | Specialized agents handle individual travel planning tasks. |
-| Supervisor Agent | Dynamically coordinates and manages agent execution. |
-| Input Guardrails | Validates user requests and blocks invalid or irrelevant inputs. |
-| Human-in-the-Loop | Allows users to review, approve, or request itinerary changes. |
+| Multi-Agent Architecture | Multiple specialized agents handle individual travel tasks. |
+| Supervisor Agent | Dynamically selects and coordinates required agents. |
+| Input Guardrails | Validates requests and blocks invalid inputs. |
+| Human-in-the-Loop | Allows users to approve or modify generated itineraries. |
 | LangGraph Orchestration | Manages agent workflows and execution paths. |
 | MCP Integration | Connects AI agents with external tools and services. |
-| PostgreSQL Memory | Stores conversations and persistent workflow state. |
-| Flight Search | Retrieves flight information through AviationStack MCP. |
-| Web Search | Uses Tavily for travel research and information retrieval. |
-| Weather Information | Retrieves weather forecasts through the Weather MCP Server. |
+| Shared State Management | Enables information sharing between agents. |
+| PostgreSQL Memory | Maintains persistent conversations and workflow state. |
+| Flight Search | Retrieves flight information using AviationStack MCP. |
+| Web Search | Uses Tavily for travel research. |
+| Weather Information | Retrieves weather information through Weather MCP. |
 | Streamlit Interface | Provides an interactive travel planning experience. |
 
 ---
 
-## 🏗️ Architecture Overview
+# 🤖 5. Specialized AI Agents
 
-The application follows a Supervisor-based Multi-Agent Architecture.
+The system uses multiple specialized agents, each responsible for a specific task.
 
-**Workflow:**
-
-User Request → Input Guardrails → Supervisor Agent → Specialized AI Agents → Shared State → Human Approval → Final Response
-
-### Specialized Agents
-
-- **Flight Agent:** Searches flight information, routes, airlines, and fares.
-- **Hotel Agent:** Searches hotels and compares prices and amenities.
-- **Weather Agent:** Retrieves weather forecasts and climate information.
-- **Budget Agent:** Analyzes estimated travel expenses and budget constraints.
-- **Itinerary Agent:** Generates personalized day-wise travel plans.
-- **Supervisor Agent:** Coordinates agents and manages workflow execution.
+| Agent | Responsibility |
+|---|---|
+| Supervisor Agent | Understands user intent and coordinates agents. |
+| Flight Agent | Searches flights, airlines, routes, and fares. |
+| Hotel Agent | Searches hotels and compares prices and amenities. |
+| Weather Agent | Retrieves weather forecasts and climate information. |
+| Budget Agent | Calculates estimated travel expenses. |
+| Itinerary Agent | Generates personalized day-wise travel plans. |
+| Final Response Agent | Generates the final approved travel recommendations. |
 
 ---
 
-## 🛠️ Technology Stack & Dependencies
+# 🔄 6. End-to-End Execution Workflow
+
+Example User Request:
+
+```text
+Plan a complete 7-day trip to Japan,
+including flights, hotels and sightseeing
+within a budget of ₹2,00,000.
+```
+
+The application follows the workflow below:
+
+### Step 1 – User Input
+
+The user submits a travel request through the Streamlit interface.
+
+### Step 2 – Input Guardrails
+
+The system validates the incoming request based on relevance, safety, and required travel information.
+
+Invalid requests are blocked before starting the agent workflow.
+
+### Step 3 – Supervisor Agent
+
+The Supervisor Agent understands the user's intent and identifies which specialized agents are required.
+
+### Step 4 – Specialized Agent Execution
+
+- Flight Agent collects flight information.
+- Hotel Agent searches hotel options.
+- Weather Agent retrieves weather forecasts.
+- Budget Agent analyzes estimated expenses.
+- Itinerary Agent prepares a day-wise travel plan.
+
+### Step 5 – MCP Tool Integration
+
+Agents interact with external tools and services through MCP.
+
+### Step 6 – Shared State Management
+
+Each agent updates its results in the shared state so other agents can access the required information.
+
+### Step 7 – Human-in-the-Loop
+
+The generated itinerary is presented to the user.
+
+The user can:
+
+- Approve the generated itinerary.
+- Request changes or modifications.
+
+If changes are requested, the workflow routes back to the relevant agents.
+
+### Step 8 – Final Response
+
+The Final Response Agent generates the approved travel plan using the collected information.
+
+### Step 9 – Persistent Memory
+
+PostgreSQL stores conversation history and workflow checkpoints.
+
+---
+
+# 🛠️ 7. Technology Stack
 
 | Category | Technology |
 |---|---|
 | Programming Language | Python |
+| LLM Provider | Groq |
 | Agent Framework | LangGraph |
 | LLM Framework | LangChain |
-| LLM Provider | Groq |
+| Tool Integration | Model Context Protocol (MCP) |
 | Web Search | Tavily API |
 | Flight Information | AviationStack API |
 | Weather Information | OpenWeatherMap API |
-| Tool Integration | Model Context Protocol (MCP) |
 | Database | PostgreSQL |
 | Persistent Memory | LangGraph Checkpointer |
 | Frontend | Streamlit |
+| Backend Integration | Python APIs |
 
 ---
 
-# 🚀 Installation & Setup Guide
+# 📋 8. Prerequisites
 
-Follow the steps below to configure the development environment and run the application locally.
-
-## Prerequisites
-
-Make sure the following tools are installed:
+Before running the application, ensure the following tools are installed:
 
 - Python 3.10 or later
 - PostgreSQL
 - Git
 - Visual Studio Code (recommended)
 - UV Package Manager
+- Required API credentials
 
-## Step 1: Clone the Repository
+---
+
+# 🚀 9. Installation & Setup Guide
+
+Follow these steps to configure and run the application locally.
+
+## Step 1 – Clone the Repository
 
 ```bash
 git clone YOUR_GITHUB_REPOSITORY_URL
@@ -129,7 +274,7 @@ git clone YOUR_GITHUB_REPOSITORY_URL
 cd multi-agent-travel-planner
 ```
 
-## Step 2: Create a Python Virtual Environment
+## Step 2 – Create a Python Virtual Environment
 
 ```bash
 python -m venv langgraph_env3
@@ -141,7 +286,7 @@ Activate the environment on Windows:
 langgraph_env3\Scripts\activate
 ```
 
-## Step 3: Install Dependencies
+## Step 3 – Install Dependencies
 
 Install the required Python packages:
 
@@ -155,13 +300,17 @@ Install PostgreSQL checkpoint dependencies:
 pip install -U "psycopg[binary,pool]" langgraph-checkpoint-postgres
 ```
 
-## Step 4: Install and Configure PostgreSQL
+## Step 4 – Install and Configure PostgreSQL
 
 Download PostgreSQL:
 
 https://www.postgresql.org/download/
 
-During installation, note your PostgreSQL username, password, and port number.
+During installation, note your:
+
+- PostgreSQL username
+- PostgreSQL password
+- PostgreSQL port number
 
 Create the application database:
 
@@ -169,7 +318,7 @@ Create the application database:
 CREATE DATABASE langgraph_memory_demo;
 ```
 
-## Step 5: Configure Environment Variables
+## Step 5 – Configure Environment Variables
 
 Create a `.env` file in the project root directory.
 
@@ -182,21 +331,25 @@ TAVILY_API_KEY=your_tavily_api_key
 
 AVIATIONSTACK_API_KEY=your_aviationstack_api_key
 
-DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5433/langgraph_memory_demo
-
 OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
+
+DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5433/langgraph_memory_demo
 ```
 
 **Important:**
-- Replace placeholder values with your actual credentials.
-- Update the PostgreSQL port according to your local configuration.
-- Never commit your `.env` file or expose API keys in GitHub.
 
-## Step 6: Generate Required API Keys
+- Replace all placeholder values with your actual credentials.
+- Update the PostgreSQL port according to your configuration.
+- Never commit your `.env` file to GitHub.
+- Keep all API credentials secure.
 
-Configure the following external API services:
+---
 
-| Service | Purpose | API / Documentation |
+# 🔑 10. API Configuration
+
+Generate API keys from the following providers:
+
+| API Provider | Purpose | Official Website |
 |---|---|---|
 | Groq | LLM inference | https://console.groq.com |
 | Tavily | Web search | https://www.tavily.com/ |
@@ -205,17 +358,17 @@ Configure the following external API services:
 
 ---
 
-# 🔌 MCP Server Configuration
+# 🔌 11. MCP Server Configuration
 
-The application uses MCP servers to provide external tool access to AI agents.
+The application uses MCP servers to connect specialized AI agents with external tools and services.
 
-## Step 7: Configure AviationStack MCP Server
+## 11.1 AviationStack MCP Server
 
-**MCP Repository:**
+**GitHub Repository:**
 
 https://github.com/Pradumnasaraf/aviationstack-mcp
 
-### 7.1 Clone the MCP Repository
+### Clone the MCP Repository
 
 Open PowerShell:
 
@@ -229,9 +382,9 @@ git clone https://github.com/Pradumnasaraf/aviationstack-mcp.git
 cd aviationstack-mcp
 ```
 
-### 7.2 Install UV Package Manager
+### Install UV Package Manager
 
-Check whether UV is installed:
+Check UV installation:
 
 ```bash
 uv --version
@@ -249,7 +402,7 @@ If installation fails, use PowerShell:
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-### 7.3 Configure AviationStack API Key
+### Configure AviationStack API Key
 
 Create a `.env` file inside the AviationStack MCP project directory:
 
@@ -257,23 +410,21 @@ Create a `.env` file inside the AviationStack MCP project directory:
 AVIATION_STACK_API_KEY=your_aviationstack_api_key
 ```
 
-### 7.4 Install MCP Dependencies
+### Install Dependencies
 
 ```bash
 uv sync
 ```
 
-This command creates the virtual environment and installs the project dependencies.
+This command creates the virtual environment and installs the required project dependencies.
 
-### 7.5 Activate the Virtual Environment
-
-On Windows:
+### Activate the Environment
 
 ```powershell
 .venv\Scripts\activate
 ```
 
-### 7.6 Start the AviationStack MCP Server
+### Start AviationStack MCP Server
 
 ```bash
 uv run -m aviationstack_mcp mcp run
@@ -287,7 +438,7 @@ python -m aviationstack_mcp mcp run
 
 The MCP server will start and wait for incoming client requests.
 
-**Note:** Keep the MCP server running while using the application.
+Keep the server running while using the application.
 
 To stop the server:
 
@@ -295,9 +446,7 @@ To stop the server:
 CTRL + C
 ```
 
----
-
-## Step 8: Configure Weather MCP Server
+## 11.2 Weather MCP Server
 
 Generate an API key from:
 
@@ -309,7 +458,7 @@ Install the required dependencies:
 pip install mcp requests
 ```
 
-Configure the OpenWeatherMap API key in the application's `.env` file:
+Configure the API key in your application's `.env` file:
 
 ```env
 OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
@@ -319,108 +468,144 @@ Start the Weather MCP Server using the configured server entry point in the proj
 
 ---
 
-# ▶️ Run the Application
+# ▶️ 12. Run the Application
 
-## Step 9: Launch the Streamlit Web Application
+After configuring the environment, database, API keys, and MCP servers, start the Streamlit application.
 
-From the project root directory, activate your Python environment and execute:
+From the project root directory:
 
 ```bash
 streamlit run frontend.py
 ```
 
-Streamlit will start the web application and provide a local URL in the terminal.
+Streamlit will start the application and display a local URL in the terminal.
 
-Open the displayed URL in your browser to access the application.
+Open the URL in your browser to access the travel planning interface.
 
 ---
 
-## 💬 Example User Prompt
+# 💬 13. Example User Prompts
 
-Try the following travel planning request:
+Try the following prompts to test the application:
+
+**Example 1 – International Travel**
 
 ```text
 Plan a complete 7-day trip to Japan,
-including flights, hotels, sightseeing,
-and estimated expenses within a budget
-of ₹2,00,000.
+including flights, hotels and sightseeing
+within a budget of ₹2,00,000.
 ```
 
-The Supervisor Agent will analyze the request and coordinate the relevant specialized agents to generate a travel plan.
+**Example 2 – Budget Travel**
+
+```text
+Plan a 4-day trip to Dubai for two people
+with flight and hotel recommendations
+within ₹1,00,000.
+```
+
+**Example 3 – Travel Modification**
+
+```text
+Change the hotel recommendation to a
+more affordable option while keeping
+the overall travel budget unchanged.
+```
 
 ---
 
-## 🛡️ Guardrails & Human-in-the-Loop
+# 🛡️ 14. Guardrails & Human-in-the-Loop
 
-### Input Guardrails
+## Input Guardrails
 
-The system validates incoming user requests before starting the agent workflow.
+Input Guardrails validate incoming user requests before starting the agent workflow.
 
-It checks:
+They help ensure:
 
 - Request relevance.
 - Input validity.
-- Safety and policy constraints.
-- Travel planning requirements.
+- Safety and policy compliance.
+- Required travel information.
 
 Invalid or unsupported requests are blocked before agent execution.
 
-### Human-in-the-Loop
+## Human-in-the-Loop (HITL)
 
-The generated travel itinerary is presented to the user for review.
+Human-in-the-Loop introduces user approval into the AI workflow.
 
-Users can:
+Users can review the generated itinerary and choose:
 
-- Approve the generated itinerary.
-- Request modifications.
-- Trigger relevant agents again to update the travel plan.
+**Approve:**
+The approved itinerary proceeds to the Final Response Agent.
 
-This ensures better control, reliability, and user involvement in the final output.
+**Request Changes:**
+The workflow routes back to the relevant agents to regenerate or modify the requested information.
+
+This provides better user control and reliability.
 
 ---
 
-## 🗄️ Memory & State Management
+# 🗄️ 15. Memory & State Management
 
 PostgreSQL is used for persistent memory and workflow checkpoint storage.
 
-It enables the application to:
+The application uses persistent storage to support:
 
-- Persist conversation history.
-- Maintain workflow state.
-- Store agent execution checkpoints.
-- Support workflow continuation where configured.
+- Conversation history.
+- Agent workflow state.
+- Execution checkpoints.
+- Workflow continuation where configured.
 
----
-
-## 📁 Project Features Summary
-
-- Multi-Agent Architecture using LangGraph.
-- Supervisor Agent for dynamic agent orchestration.
-- Input Guardrails and request validation.
-- Human-in-the-Loop approval workflow.
-- PostgreSQL-based persistent memory.
-- Tavily Search Integration.
-- AviationStack MCP Integration.
-- Weather MCP Integration.
-- Shared State Management.
-- Streamlit Web Application.
-- External API Integration.
-- Real-Time Travel Information (subject to API availability and provider limits).
+Shared State enables agents to exchange information during execution, while PostgreSQL provides persistence across application sessions.
 
 ---
 
-## 🔮 Future Enhancements
+# 📁 16. Project Structure
 
-- Docker-based application deployment.
-- Kubernetes and Azure Kubernetes Service (AKS) integration.
+```text
+multi-agent-travel-planner/
+│
+├── README.md
+├── requirements.txt
+├── .env
+│
+├── agents.py
+├── config.py
+├── frontend.py
+├── graph.py
+├── mcp_client.py
+├── state.py
+├── weather_mcp_server.py
+│
+└── ...
+```
+
+---
+
+# 🔮 17. Future Enhancements
+
+The following improvements can extend the application towards production deployment:
+
+- Docker-based application containerization.
+- Kubernetes and Azure Kubernetes Service (AKS) deployment.
 - CI/CD automation using Azure DevOps.
 - Infrastructure provisioning using Terraform.
-- Application monitoring and observability.
-- Advanced agent retry and failure-handling mechanisms.
+- Application monitoring using Azure Monitor.
+- Distributed tracing and agent execution observability.
+- Advanced retry and failure-handling mechanisms.
+- Additional real-world travel API integrations.
 
 ---
 
-## 👨‍💻 Author
+# 🎯 18. Project Objective
+
+The primary objective of this project is to design and implement a real-world Agentic AI application using multi-agent orchestration, LLMs, MCP, and persistent memory.
+
+It demonstrates how multiple specialized AI agents can collaborate, use external tools, share information, and interact with humans to solve complex real-world tasks.
+
+---
+
+# 👨‍💻 19. Author
 
 **Vimlendu Shekhar Rai**
 
@@ -428,4 +613,6 @@ Generative AI Engineer | Azure | DevOps | Agentic AI | LangGraph | MCP | LLM | R
 
 ---
 
-⭐ If you find this project useful, consider giving it a star!
+⭐ If you find this project useful, consider giving this repository a star!
+
+---
